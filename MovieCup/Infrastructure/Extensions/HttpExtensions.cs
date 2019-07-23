@@ -87,8 +87,6 @@ namespace Infrastructure
 				DeclaredType = typeof(TModel)
 			};
 
-			//return context.ExecuteResultAsync(result);
-
 			var executor = context.RequestServices.GetRequiredService<ObjectResultExecutor>();
 			var routerData = context.GetRouteData() ?? EmptyRouteData;
 			var actionContext = new ActionContext(context, routerData, EmptyActionDescriptor);

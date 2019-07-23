@@ -12,7 +12,6 @@ namespace Services
 		public ClassificacaoValidator()
 		{
 			RuleFor(e => e.campeonato).NotNull().WithMessage("Deve-se informar o campeonato.");
-			//RuleFor(e => e.filmes).Must(e => e.Count > 0).WithMessage("Deve-se informar os filmes classificados.");
 		}
 	}
 }

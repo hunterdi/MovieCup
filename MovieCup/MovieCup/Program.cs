@@ -24,7 +24,6 @@ namespace MovieCup
 				.UseStartup<Startup>()
 				.ConfigureLogging((hostingContext, logging) =>
 				{
-					//logging.AddLog4Net();
 					logging.SetMinimumLevel(LogLevel.Debug);
 					logging.AddConsole();
 					logging.AddDebug();

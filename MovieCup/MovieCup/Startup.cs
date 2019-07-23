@@ -47,7 +47,6 @@ namespace MovieCup
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			//loggerFactory.AddLog4Net();
 			var logger = loggerFactory.CreateLogger("MovieCup");
 
 			app.UseStaticFiles();
