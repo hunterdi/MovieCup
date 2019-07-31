@@ -1,5 +1,9 @@
 # MovieCup
 
+## Repositories
+    * Front: https://github.com/hunterdi/MovieCupFront
+    * Back: https://github.com/hunterdi/MovieCup
+    
 ## Requirements
 * Dotnet Core >= 2.2
 * Node >= 10.15
