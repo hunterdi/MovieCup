@@ -34,6 +34,8 @@ namespace MovieCup
 			services.AddValidators();
 			services.AddErrorHandler();
 			services.AddDbContextConfiguration(this._configuration);
+			services.AddIdentityConfiguration();
+			services.AddTokenConfiguration(this._configuration);
 			services.AddMvcCoreConfiguration();
 			services.AddSwaggerConfiguration();
 
@@ -54,6 +56,12 @@ namespace MovieCup
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+				app.UseDatabaseErrorPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Home/Error");
+				app.UseHsts();
 			}
 
 			app.UseSwaggerConfiguration();
@@ -62,6 +70,8 @@ namespace MovieCup
 			app.UseCors(SystemConstants.Cors.FrontMovieCup.ToDescription());
 
 			SeedInitializer.Seed(app, _configuration);
+			app.UseCookiePolicy();
+			app.UseAuthentication();
 
 			app.UseMvcConfiguration();
 		}

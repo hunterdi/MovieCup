@@ -27,6 +27,9 @@ namespace Repository
 
 			builder.RegisterType<FilmeCampeonatoRepository>().As<IFilmeCampeonatoRepository>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
 			builder.RegisterType<FilmeCampeonatoRepository>().As<IRepositoryBase<FilmeCampeonato>>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
+
+			builder.RegisterType<ApplicationUserRepository>().As<IApplicationUserRepository>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
+			builder.RegisterType<ApplicationUserRepository>().As<IRepositoryBase<ApplicationUser>>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
 		}
 	}
 }

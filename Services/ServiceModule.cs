@@ -24,6 +24,10 @@ namespace Services
 
 			builder.RegisterType<FilmeCampeonatoService>().As<IFilmeCampeonatoService>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
 			builder.RegisterType<FilmeCampeonatoService>().As<IServiceBase<FilmeCampeonato>>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
+
+			builder.RegisterType<ApplicationUserService>().As<IApplicationUserService>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
+			builder.RegisterType<ApplicationUserService>().As<IServiceBase<ApplicationUser>>().InstancePerLifetimeScope().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
+
 		}
 	}
 }

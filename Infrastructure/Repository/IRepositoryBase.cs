@@ -7,7 +7,7 @@ using Domains;
 
 namespace Infrastructure
 {
-	public interface IRepositoryBase<TDomain> where TDomain : BaseDomain
+	public interface IRepositoryBase<TDomain> where TDomain : class
 	{
 		IQueryable<TDomain> Pagination(Expression<Func<TDomain, bool>> filter, Expression<Func<TDomain, object>> orderBy, int pageSize, int pageIndex);
 

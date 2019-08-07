@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-	public abstract class RepositoryBase<TDomain, TContext> : IRepositoryBase<TDomain> where TDomain : BaseDomain where TContext : DbContext
+	public abstract class RepositoryBase<TDomain, TContext> : IRepositoryBase<TDomain> where TDomain : class where TContext : DbContext
 	{
 		protected readonly TContext _dbContext;
 		protected readonly DbSet<TDomain> _domainEntitySet;

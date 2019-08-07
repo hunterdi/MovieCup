@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Domains;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
-	public class CampeonatoRepository : RepositoryBase<Campeonato, ApplicationMemoryDbContext>, ICampeonatoRepository
+	public class CampeonatoRepository : RepositoryBase<Campeonato, DbContext>, ICampeonatoRepository
 	{
-		public CampeonatoRepository(ApplicationMemoryDbContext dbContext) : base(dbContext)
+		public CampeonatoRepository(DbContext dbContext) : base(dbContext)
 		{
 
 		}

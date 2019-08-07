@@ -7,7 +7,7 @@ using Domains;
 
 namespace Infrastructure
 {
-	public abstract class ServiceBase<TDomain> : IServiceBase<TDomain> where TDomain : BaseDomain
+	public abstract class ServiceBase<TDomain> : IServiceBase<TDomain> where TDomain : class
 	{
 		protected readonly IRepositoryBase<TDomain> _repositoryBase;
 
@@ -111,9 +111,13 @@ namespace Infrastructure
 			throw new NotImplementedException();
 		}
 
-		public virtual Task<TDomain> UpdateAsync(TDomain obj, object key)
+		public virtual async Task<TDomain> UpdateAsync(TDomain obj, object key)
 		{
-			throw new NotImplementedException();
+			await this._repositoryBase.UpdateAsync(obj);
+
+			await this._repositoryBase.SaveChangesAsync();
+
+			return obj;
 		}
 
 		public virtual void Remove(object id)

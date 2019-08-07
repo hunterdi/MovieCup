@@ -18,6 +18,7 @@ namespace Mappings
 				configuration.AddProfile(new ClassificacaoMapper());
 				configuration.AddProfile(new DisputaMapper());
 				configuration.AddProfile(new FilmeCampeonatoMapper());
+				configuration.AddProfile(new IdentityMapping());
 			});
 
 			services.AddSingleton(configMapper.CreateMapper());

@@ -14,7 +14,7 @@ namespace Seed
 	{
 		public static void Seed(IApplicationBuilder applicationBuilder, IConfiguration configuration)
 		{
-			ApplicationMemoryDbContext dbContext = applicationBuilder.ApplicationServices.GetRequiredService<ApplicationMemoryDbContext>();
+			DbContext dbContext = applicationBuilder.ApplicationServices.GetRequiredService<DbContext>();
 			dbContext.Database.EnsureCreatedAsync();
 
 			Task.Run(async () =>

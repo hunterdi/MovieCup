@@ -79,16 +79,16 @@ namespace Tests
 			return retorno;
 		}
 
-		private ApplicationMemoryDbContext GetDbContext()
+		private DbContext GetDbContext()
 		{
 			Mock<DbSet<Campeonato>> dbCampeonato = new Mock<DbSet<Campeonato>>();
 			Mock<DbSet<Classificacao>> dbClassificacao = new Mock<DbSet<Classificacao>>();
 			Mock<DbSet<Disputa>> dbDisputa = new Mock<DbSet<Disputa>>();
 			Mock<DbSet<Filme>> dbFilme = new Mock<DbSet<Filme>>();
 
-			var optionsBuilder = new DbContextOptionsBuilder<ApplicationMemoryDbContext>()
+			var optionsBuilder = new DbContextOptionsBuilder<DbContext>()
 				.UseInMemoryDatabase("MovieCup").Options;
-			var dbContext = new ApplicationMemoryDbContext(optionsBuilder);
+			var dbContext = new DbContext(optionsBuilder);
 
 			//dbContext.SetupGet(e => e.Campeonatos).Returns(dbCampeonato.Object);
 			//dbContext.SetupGet(e => e.Classificacoes).Returns(dbClassificacao.Object);

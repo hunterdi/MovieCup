@@ -14,9 +14,9 @@ namespace Seed
 {
 	public static class FilmeSeed
 	{
-		public static async Task Initialize(ApplicationMemoryDbContext dbContext, IConfiguration configuration, IApplicationBuilder applicationBuilder)
+		public static async Task Initialize(DbContext dbContext, IConfiguration configuration, IApplicationBuilder applicationBuilder)
 		{
-			if (!dbContext.Filmes.AnyAsync().Result)
+			if (!dbContext.Database.EnsureCreated())
 			{
 				var response = await WebClient.GetAsync(configuration.GetSection("HostMovies").Value);
 				var moviesResponse = JsonConvert.DeserializeObject<List<FilmeResponseSeed>>(response);
@@ -24,7 +24,7 @@ namespace Seed
 				var mapper = applicationBuilder.ApplicationServices.GetRequiredService<IMapper>();
 				var movies = mapper.Map<List<FilmeResponseSeed>, List<Filme>>(moviesResponse);
 
-				await dbContext.Filmes.AddRangeAsync(movies);
+				await dbContext.AddRangeAsync(movies);
 			}
 			await Task.CompletedTask;
 		}

@@ -8,7 +8,7 @@ using Domains;
 
 namespace Infrastructure
 {
-	public interface IServiceBase<TDomain> where TDomain : BaseDomain
+	public interface IServiceBase<TDomain> where TDomain : class
 	{
 		TDomain Create(TDomain obj);
 		Task CreateAsync(TDomain obj);

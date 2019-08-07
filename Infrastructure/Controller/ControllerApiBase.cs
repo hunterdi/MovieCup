@@ -35,9 +35,10 @@ namespace Infrastructure
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Create))]
 		[HttpPost]
-		public async virtual Task<ActionResult> Create([FromBody] TDomain dto)
+		public async virtual Task<ActionResult> Create([FromBody] TDto dto)
 		{
-			await this._serviceCrudBase.CreateAsync(dto);
+			var domain = this._mapper.Map<TDomain>(dto);
+			await this._serviceCrudBase.CreateAsync(domain);
 
 			return Ok();
 		}
