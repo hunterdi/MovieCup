@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Domains;
@@ -41,7 +42,7 @@ namespace MovieCup
 
 			if (result.Succeeded)
 			{
-				return Ok(new { message = "successful operation", statusCode = 200 });
+				return StatusCode((int)HttpStatusCode.Created, new { message = "successful operation", statusCode = HttpStatusCode.Created });
 			}
 			return UnprocessableEntity(result.Errors.Where(e => e.Code.ToUpper() == "DuplicateEmail".ToUpper()).Select(e => new { message = "E-mail already exists", statusCode = 422 }).Distinct());
 		}
@@ -56,19 +57,19 @@ namespace MovieCup
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
 		[HttpPost("signin")]
-		public async Task<IActionResult> LoginAsync([FromBody] SigninDto dto, [FromServices]SigningConfigurations signingConfigurations, [FromServices]TokenConfigurations tokenConfigurations, [FromServices] IApplicationUserService userService)
+		public async Task<IActionResult> LoginAsync([FromBody] SigninDto dto, [FromServices]SigningConfigurations signingConfigurations, [FromServices]TokenConfigurations tokenConfigurations)
 		{
-			var result = await _service.SignInAsync(dto.Email, dto.Password);
+			var result = await this._service.SignInAsync(dto.Email, dto.Password);
 
 			if (result.Succeeded)
 			{
-				var user = (await userService.GetByIncludingAsync((e => e.Email.ToUpper() == dto.Email.ToUpper()), false, (e => e.Phones))).FirstOrDefault();
+				var user = (await this._service.GetByIncludingAsync((e => e.Email.ToUpper() == dto.Email.ToUpper()), false, (e => e.Phones))).FirstOrDefault();
 				if (user == null)
 				{
 					return NotFound(new { message = "User Not Found", statusCode = 404 });
 				}
 				user.LastLogin = DateTime.Now;
-				await userService.UpdateAsync(user, user.Id);
+				await this._service.UpdateAsync(user, user.Id);
 
 				var response = this._mapper.Map<ApplicationUserDto>(user);
 				
@@ -77,12 +78,12 @@ namespace MovieCup
 			return UnprocessableEntity(new { message = "Invalid e-mail or password", statusCode = 422 });
 		}
 
-		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
+		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
 		[UserIdentityValidatorsMiddleware, Authorize("Bearer")]
-		[HttpPost("me")]
-		public async Task<IActionResult> Me([FromQuery(Name = "email")] string email, [FromServices] IApplicationUserService userService)
+		[HttpGet("me")]
+		public async Task<IActionResult> Me([FromQuery(Name = "email")] string email)
 		{
-			var user = (await userService.GetAllIncludingAsync((e => e.Phones))).SingleOrDefault(e => e.Email.ToUpper() == email.ToUpper());
+			var user = (await this._service.GetByIncludingAsync((e => e.Email.ToUpper() == email.ToUpper()), false, (e => e.Phones))).FirstOrDefault();
 			var result = _mapper.Map<ApplicationUserDto>(user);
 
 			if (result != null)
@@ -100,7 +101,7 @@ namespace MovieCup
 		{
 			var user = await this._service.ChangePasswordAsync(dto.Email, dto.CurrentPassword, dto.NewPassword);
 
-			return Ok();
+			return StatusCode(204);
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
@@ -110,7 +111,7 @@ namespace MovieCup
 		{
 			var user = await this._service.ChangeEmailAsync(dto.CurrentEmail, dto.NewEmail);
 
-			return Ok();
+			return StatusCode(204);
 		}
 
 		private IActionResult GenerateResultToken(ApplicationUser user, SigningConfigurations signingConfigurations, TokenConfigurations tokenConfigurations, ApplicationUserDto dto)
