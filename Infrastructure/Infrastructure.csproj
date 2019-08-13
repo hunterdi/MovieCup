@@ -10,6 +10,9 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
+    <PackageReference Include="Flurl" Version="2.8.2" />
+    <PackageReference Include="GraphQl.AspNetCore" Version="1.1.4" />
+    <PackageReference Include="LinqKit.Core" Version="1.1.16" />
     <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.16" />
     <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="3.0.0" />
@@ -37,6 +40,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="2.2.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="2.0.7" />
   </ItemGroup>
 
   <ItemGroup>
