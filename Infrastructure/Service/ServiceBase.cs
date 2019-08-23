@@ -71,7 +71,8 @@ namespace Infrastructure
 			throw new NotImplementedException();
 		}
 
-		public virtual async Task<ICollection<TDomain>> GetByIncludingAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, params Expression<Func<TDomain, object>>[] includeProperties)
+		public virtual async Task<ICollection<TDomain>> GetByIncludingAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, 
+			params Expression<Func<TDomain, object>>[] includeProperties)
 		{
 			return await this._repositoryBase.GetByIncludingAsync(match, asNoTracking, includeProperties);
 		}
@@ -98,12 +99,12 @@ namespace Infrastructure
 
 		public virtual IEnumerable<TDomain> CreateCollectionWithProxy(IEnumerable<TDomain> domains)
 		{
-			return this._repositoryBase.CreateCollectionWithProxy(domains);
+			return this._repositoryBase.CreateWithProxy(domains);
 		}
 
 		public virtual async Task<ICollection<TDomain>> CreateCollectionAsync(ICollection<TDomain> domains)
 		{
-			return await this._repositoryBase.CreateCollectionAsync(domains);
+			return await this._repositoryBase.CreateAsync(domains);
 		}
 
 		public virtual TDomain Update(TDomain obj, object key)

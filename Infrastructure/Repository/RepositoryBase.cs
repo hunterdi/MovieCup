@@ -31,10 +31,10 @@ namespace Infrastructure
 			var dataBaseCount = await this._domainEntitySet.CountAsync();
 			if (asNoTracking)
 			{
-				return new Tuple<ICollection<TDomain>, int>(await this._domainEntitySet.AsNoTracking().OrderBy(orderBy).Where(where).Skip(skip).Take(take).ToListAsync(), dataBaseCount);
+				return new Tuple<ICollection<TDomain>, int>(await this._domainEntitySet.AsNoTracking().Where(where).OrderBy(orderBy).Skip(skip).Take(take).ToListAsync(), dataBaseCount);
 			}
 
-			return new Tuple<ICollection<TDomain>, int>(await this._domainEntitySet.OrderBy(orderBy).Where(where).Skip(skip).Take(take).ToListAsync(), dataBaseCount);
+			return new Tuple<ICollection<TDomain>, int>(await this._domainEntitySet.Where(where).OrderBy(orderBy).Skip(skip).Take(take).ToListAsync(), dataBaseCount);
 		}
 
 		public virtual async Task<ICollection<TDomain>> GetAllByAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true)
@@ -55,7 +55,8 @@ namespace Infrastructure
 			return queryable;
 		}
 
-		public virtual IQueryable<TDomain> GetByIncluding(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, params Expression<Func<TDomain, object>>[] includeProperties)
+		public virtual IQueryable<TDomain> GetByIncluding(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, 
+			params Expression<Func<TDomain, object>>[] includeProperties)
 		{
 			IQueryable<TDomain> queryable = GetAll(asNoTracking);
 			foreach (Expression<Func<TDomain, object>> includeProperty in includeProperties)
@@ -71,7 +72,8 @@ namespace Infrastructure
 			return await GetAllIncluding(asNoTracking, includeProperties).ToListAsync();
 		}
 
-		public virtual async Task<ICollection<TDomain>> GetByIncludingAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, params Expression<Func<TDomain, object>>[] includeProperties)
+		public virtual async Task<ICollection<TDomain>> GetByIncludingAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, 
+			params Expression<Func<TDomain, object>>[] includeProperties)
 		{
 			return await GetByIncluding(match, asNoTracking, includeProperties).ToListAsync();
 		}
@@ -120,14 +122,14 @@ namespace Infrastructure
 			this._dbContext.Add(domain);
 		}
 
-		public virtual async Task<ICollection<TDomain>> CreateCollectionAsync(ICollection<TDomain> domains)
+		public virtual async Task<ICollection<TDomain>> CreateAsync(ICollection<TDomain> domains)
 		{
 			await this._domainEntitySet.AddRangeAsync(domains);
 
 			return domains;
 		}
 
-		public virtual IEnumerable<TDomain> CreateCollectionWithProxy(IEnumerable<TDomain> domains)
+		public virtual IEnumerable<TDomain> CreateWithProxy(IEnumerable<TDomain> domains)
 		{
 			foreach (var domain in domains)
 			{
@@ -142,13 +144,13 @@ namespace Infrastructure
 			return Task.CompletedTask;
 		}
 
-		public virtual Task UpdateCollectionAsync(ICollection<TDomain> domains)
+		public virtual Task UpdateAsync(ICollection<TDomain> domains)
 		{
 			this._domainEntitySet.UpdateRange(domains);
 			return Task.CompletedTask;
 		}
 
-		public virtual IEnumerable<TDomain> UpdateCollectionWithProxy(IEnumerable<TDomain> domains)
+		public virtual IEnumerable<TDomain> UpdateWithProxy(IEnumerable<TDomain> domains)
 		{
 			foreach (var domain in domains)
 			{

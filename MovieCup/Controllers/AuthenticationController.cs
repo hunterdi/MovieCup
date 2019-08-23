@@ -57,7 +57,8 @@ namespace MovieCup
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
 		[HttpPost("signin")]
-		public async Task<IActionResult> LoginAsync([FromBody] SigninDto dto, [FromServices]SigningConfigurations signingConfigurations, [FromServices]TokenConfigurations tokenConfigurations)
+		public async Task<IActionResult> LoginAsync([FromBody] SigninDto dto, [FromServices]SigningConfigurations signingConfigurations, 
+			[FromServices]TokenConfigurations tokenConfigurations)
 		{
 			var result = await this._service.SignInAsync(dto.Email, dto.Password);
 
@@ -114,7 +115,8 @@ namespace MovieCup
 			return StatusCode(204);
 		}
 
-		private IActionResult GenerateResultToken(ApplicationUser user, SigningConfigurations signingConfigurations, TokenConfigurations tokenConfigurations, ApplicationUserDto dto)
+		private IActionResult GenerateResultToken(ApplicationUser user, SigningConfigurations signingConfigurations, TokenConfigurations tokenConfigurations, 
+			ApplicationUserDto dto)
 		{
 			var objectToken = user.GenerateToken(tokenConfigurations, signingConfigurations);
 

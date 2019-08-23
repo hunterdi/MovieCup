@@ -20,7 +20,8 @@ namespace Infrastructure
 
 		IQueryable<TDomain> GetByIncluding(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, params Expression<Func<TDomain, object>>[] includeProperties);
 
-		Task<ICollection<TDomain>> GetByIncludingAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, params Expression<Func<TDomain, object>>[] includeProperties);
+		Task<ICollection<TDomain>> GetByIncludingAsync(Expression<Func<TDomain, bool>> match, bool asNoTracking = true, 
+			params Expression<Func<TDomain, object>>[] includeProperties);
 
 		IQueryable<TDomain> GetAll(bool asNoTracking = true);
 
@@ -36,15 +37,15 @@ namespace Infrastructure
 
 		Task CreateAsync(TDomain domain);
 
-		Task<ICollection<TDomain>> CreateCollectionAsync(ICollection<TDomain> domains);
+		Task<ICollection<TDomain>> CreateAsync(ICollection<TDomain> domains);
 
-		IEnumerable<TDomain> CreateCollectionWithProxy(IEnumerable<TDomain> domains);
+		IEnumerable<TDomain> CreateWithProxy(IEnumerable<TDomain> domains);
 
 		Task UpdateAsync(TDomain domain);
 
-		Task UpdateCollectionAsync(ICollection<TDomain> domains);
+		Task UpdateAsync(ICollection<TDomain> domains);
 
-		IEnumerable<TDomain> UpdateCollectionWithProxy(IEnumerable<TDomain> domains);
+		IEnumerable<TDomain> UpdateWithProxy(IEnumerable<TDomain> domains);
 
 		Task RemoveByAsync(Func<TDomain, bool> where);
 
