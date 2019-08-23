@@ -80,7 +80,7 @@ namespace MovieCup
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
-		[UserIdentityValidatorsMiddleware, Authorize("MovieCup")]
+		[UserIdentityValidatorsMiddleware, Authorize("MovieCup"), ValidateAntiForgeryToken]
 		[HttpGet("me")]
 		public async Task<IActionResult> Me([FromQuery(Name = "email")] string email)
 		{
@@ -96,7 +96,7 @@ namespace MovieCup
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
-		[UserIdentityValidatorsMiddleware, Authorize("MovieCup")]
+		[UserIdentityValidatorsMiddleware, Authorize("MovieCup"), ValidateAntiForgeryToken]
 		[HttpPut("password")]
 		public async Task<IActionResult> ChangePassword([FromBody] ApplicationUserChangePasswordDto dto)
 		{
@@ -106,7 +106,7 @@ namespace MovieCup
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
-		[UserIdentityValidatorsMiddleware, Authorize("MovieCup")]
+		[UserIdentityValidatorsMiddleware, Authorize("MovieCup"), ValidateAntiForgeryToken]
 		[HttpPut("email")]
 		public async Task<IActionResult> ChangeEmail([FromBody] ApplicationUserChangeEmailDto dto)
 		{
