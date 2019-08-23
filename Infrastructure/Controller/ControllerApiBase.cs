@@ -2,11 +2,13 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure
 {
+	[Authorize("MovieCup")]
 	[EnableCors("MovieCup")]
 	[Produces("application/json")]
 	[Route("api/[controller]")]

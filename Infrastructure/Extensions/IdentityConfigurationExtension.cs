@@ -3,10 +3,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
 using Domains;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -27,13 +26,18 @@ namespace Infrastructure
 
 			services.Configure<IdentityOptions>(options =>
 			{
-				options.Password.RequireDigit = false;
-				options.Password.RequiredLength = 5;
-				options.Password.RequireLowercase = false;
-				options.Password.RequireUppercase = false;
-				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireDigit = true;
+				options.Password.RequiredLength = 6;
+				options.Password.RequireLowercase = true;
+				options.Password.RequireUppercase = true;
+				options.Password.RequireNonAlphanumeric = true;
+
+				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+				options.Lockout.MaxFailedAccessAttempts = 5;
+				options.Lockout.AllowedForNewUsers = true;
+
 				options.User.RequireUniqueEmail = true;
-				options.Lockout.MaxFailedAccessAttempts = 3;
+				options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 			});
 
 			return services;
@@ -81,61 +85,54 @@ namespace Infrastructure
 			new ConfigureFromConfigurationOptions<TokenConfigurations>(configuration.GetSection("Jwt")).Configure(tokenConfigurations);
 			services.AddSingleton(tokenConfigurations);
 
-			services.Configure<CookiePolicyOptions>(options =>
+			services.AddAuthentication(options =>
 			{
-				options.CheckConsentNeeded = context => true;
-				options.MinimumSameSitePolicy = SameSiteMode.None;
-			});
-
-			services.AddAuthentication(option =>
-			{
-				option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-				option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-				option.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			})
 			.AddJwtBearer(bearerOptions =>
 			{
-				var paramsValidation = bearerOptions.TokenValidationParameters;
-				paramsValidation.IssuerSigningKey = signingConfigurations.key;
-				paramsValidation.ValidAudience = tokenConfigurations.Audience;
-				paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
-				paramsValidation.ValidateIssuerSigningKey = true;
-				paramsValidation.ValidateLifetime = true;
-				paramsValidation.ClockSkew = TimeSpan.Zero;
-			})
-			.AddCookie(options =>
-			{
-				options.Cookie.SameSite = SameSiteMode.Strict;
-				options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-
-				options.AccessDeniedPath = new PathString("/authentication");
-				options.ExpireTimeSpan = TimeSpan.FromHours(4);
-				options.LoginPath = new PathString("/authentication");
-				options.LogoutPath = new PathString("/authentication/sign-out");
-
-				options.Events = new CookieAuthenticationEvents { OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync };
-			});
-			//IdentityConstants
-
-			//services.TryAddScoped<IdentityErrorDescriber>();
-			//services.TryAddScoped<ILookupNormalizer, UpperInvariantLookupNormalizer>();
-			//services.TryAddScoped<IPasswordHasher<ApplicationUser>, PasswordHasher<ApplicationUser>>();
-			//services.TryAddScoped<IPasswordValidator<ApplicationUser>, PasswordValidator<ApplicationUser>>();
-			//services.TryAddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, UserClaimsPrincipalFactory<ApplicationUser>>();
-			//services.TryAddScoped<UserManager<ApplicationUser>>();
-			////services.TryAddScoped<IUserStore<ApplicationUser>, ApplicationUserStore>();
-			//services.TryAddScoped<IUserValidator<ApplicationUser>, UserValidator<ApplicationUser>>();
-			//services.TryAddScoped<ISecurityStampValidator, SecurityStampValidator<ApplicationUser>>();
-			//services.TryAddScoped<SignInManager<ApplicationUser>>();
-
+				//Remove the comment bellow case don't needing send the token of the client to server
+				//bearerOptions.RequireHttpsMetadata = false;
+				//bearerOptions.SaveToken = true;
+				bearerOptions.TokenValidationParameters.IssuerSigningKey = signingConfigurations.key;
+				bearerOptions.TokenValidationParameters.ValidAudience = tokenConfigurations.Audience;
+				bearerOptions.TokenValidationParameters.ValidIssuer = tokenConfigurations.Issuer;
+				bearerOptions.TokenValidationParameters.ValidateIssuerSigningKey = true;
+				bearerOptions.TokenValidationParameters.ValidateLifetime = true;
+				bearerOptions.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
+			}).AddCookiesTokienConfiguration();
+			
 			services.AddAuthorization(auth =>
 			{
-				auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-					.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-					.RequireAuthenticatedUser().Build());
+				auth.AddPolicy("MovieCup", policy =>
+				{
+					policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+					policy.RequireAuthenticatedUser();
+				});
 			});
 
 			return services;
+		}
+
+		public static AuthenticationBuilder AddCookiesTokienConfiguration(this AuthenticationBuilder authenticationBuilder)
+		{
+			authenticationBuilder.AddCookie(options =>
+			 {
+				 options.Cookie.SameSite = SameSiteMode.None;
+				 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+				 options.Cookie.HttpOnly = true;
+				 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+				 options.AccessDeniedPath = new PathString("/authentication");
+				 options.LoginPath = new PathString("/authentication");
+				 options.LogoutPath = new PathString("/authentication/sign-out");
+				 options.SlidingExpiration = true;
+
+				 options.Events = new CookieAuthenticationEvents { OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync };
+			 });
+
+			return authenticationBuilder;
 		}
 	}
 }

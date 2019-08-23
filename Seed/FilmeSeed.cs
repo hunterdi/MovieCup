@@ -18,13 +18,13 @@ namespace Seed
 		{
 			if (!dbContext.Database.EnsureCreated())
 			{
-				var response = await WebClient.GetAsync(configuration.GetSection("HostMovies").Value);
-				var moviesResponse = JsonConvert.DeserializeObject<List<FilmeResponseSeed>>(response);
+				//var response = await WebClient.GetAsync(configuration.GetSection("HostMovies").Value);
+				//var moviesResponse = JsonConvert.DeserializeObject<List<FilmeResponseSeed>>(response);
 
-				var mapper = applicationBuilder.ApplicationServices.GetRequiredService<IMapper>();
-				var movies = mapper.Map<List<FilmeResponseSeed>, List<Filme>>(moviesResponse);
+				//var mapper = applicationBuilder.ApplicationServices.GetRequiredService<IMapper>();
+				//var movies = mapper.Map<List<FilmeResponseSeed>, List<Filme>>(moviesResponse);
 
-				await dbContext.AddRangeAsync(movies);
+				//await dbContext.AddRangeAsync(movies);
 			}
 			await Task.CompletedTask;
 		}

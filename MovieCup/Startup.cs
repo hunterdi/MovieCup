@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Infrastructure;
 using Mappings;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -43,7 +40,7 @@ namespace MovieCup
 			builder.RegisterModule<RepositoryModule>();
 			builder.RegisterModule<ServiceModule>();
 			builder.Populate(services);
-			
+
 			return new AutofacServiceProvider(builder.Build());
 		}
 
@@ -64,14 +61,13 @@ namespace MovieCup
 				app.UseHsts();
 			}
 
-			app.UseSwaggerConfiguration();
-
 			app.UseErrorHandler();
 			app.UseCors(SystemConstants.Cors.FrontMovieCup.ToDescription());
+			//app.UseCookiePolicy();
+			app.UseAuthentication();
+			app.UseSwaggerConfiguration();
 
 			SeedInitializer.Seed(app, _configuration);
-			app.UseCookiePolicy();
-			app.UseAuthentication();
 
 			app.UseMvcConfiguration();
 		}
