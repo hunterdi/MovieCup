@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seed", "Seed\Seed.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{53DDAACC-061C-43FC-80F1-8A115F4715BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayerGraphQL", "LayerGraphQL\LayerGraphQL.csproj", "{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{53DDAACC-061C-43FC-80F1-8A115F4715BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53DDAACC-061C-43FC-80F1-8A115F4715BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53DDAACC-061C-43FC-80F1-8A115F4715BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
