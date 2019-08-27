@@ -1,7 +1,9 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using GraphQL.Types;
 using Infrastructure;
+using LayerGraphQL;
 using Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +37,7 @@ namespace MovieCup
 			services.AddTokenConfiguration(this._configuration);
 			services.AddMvcCoreConfiguration();
 			services.AddSwaggerConfiguration();
+			services.AddConfigurationGraphQL();
 
 			var builder = new ContainerBuilder();
 			builder.RegisterModule<RepositoryModule>();
@@ -47,7 +50,7 @@ namespace MovieCup
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
 			var logger = loggerFactory.CreateLogger("MovieCup");
-
+			
 			app.UseStaticFiles();
 
 			if (env.IsDevelopment())
@@ -63,9 +66,10 @@ namespace MovieCup
 
 			app.UseErrorHandler();
 			app.UseCors(SystemConstants.Cors.FrontMovieCup.ToDescription());
-			//app.UseCookiePolicy();
 			app.UseAuthentication();
+			app.UseCookiePolicy();//
 			app.UseSwaggerConfiguration();
+			app.UseConfigurationGraphQL();
 
 			SeedInitializer.Seed(app, _configuration);
 
