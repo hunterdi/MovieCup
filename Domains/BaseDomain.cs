@@ -6,6 +6,6 @@ namespace Domains
 {
 	public class BaseDomain
 	{
-		public long id { get; set; }
+		public long Id { get; set; }
 	}
 }

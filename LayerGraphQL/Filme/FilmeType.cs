@@ -10,7 +10,7 @@ namespace LayerGraphQL
 	{
 		public FilmeType()
 		{
-			Field(e => e.id);
+			Field(e => e.Id);
 			Field(e => e.ano);
 			Field(e => e.codigo);
 			Field(e => e.nota);

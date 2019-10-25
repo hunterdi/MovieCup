@@ -10,7 +10,7 @@ namespace LayerGraphQL
 	{
 		public ClassificacaoType()
 		{
-			Field(f => f.id);
+			Field(f => f.Id);
 			Field<CampeonatoType>(nameof(Classificacao.campeonato));
 			Field<ListGraphType<DisputaType>>(nameof(Classificacao.disputa));
 		}

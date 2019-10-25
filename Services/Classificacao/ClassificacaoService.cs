@@ -119,7 +119,7 @@ namespace Services
 
 			foreach (var classificacao in response)
 			{
-				var disputas = await this.disputaService.GetByIncludingAsync(e => e.classificacao.id == classificacao.id, asNoTracking, expression.ToArray());
+				var disputas = await this.disputaService.GetByIncludingAsync(e => e.classificacao.Id == classificacao.Id, asNoTracking, expression.ToArray());
 
 				classificacao.disputa = disputas.ToList();
 			}

@@ -11,7 +11,7 @@ namespace Mappings
 			CreateMap<Filme, FilmeDto>().ReverseMap();
 			CreateMap<FilmeResponseSeed, Filme>()
 				.ForMember(dest => dest.codigo, src => src.MapFrom(e => e.id))
-				.ForMember(dest => dest.id, src => src.Ignore()).ReverseMap();
+				.ForMember(dest => dest.Id, src => src.Ignore()).ReverseMap();
 		}
 	}
 }

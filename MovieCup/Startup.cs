@@ -67,7 +67,7 @@ namespace MovieCup
 			app.UseErrorHandler();
 			app.UseCors(SystemConstants.Cors.FrontMovieCup.ToDescription());
 			app.UseAuthentication();
-			app.UseCookiePolicy();//
+			app.UseCookiePolicy();
 			app.UseSwaggerConfiguration();
 			app.UseConfigurationGraphQL();
 

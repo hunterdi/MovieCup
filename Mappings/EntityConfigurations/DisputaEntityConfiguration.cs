@@ -12,7 +12,7 @@ namespace Mappings
 	{
 		public void Configure(EntityTypeBuilder<Disputa> builder)
 		{
-			builder.HasKey(e => e.id);
+			builder.HasKey(e => e.Id);
 
 			builder.Property(e => e.vencedor).IsRequired();
 		}

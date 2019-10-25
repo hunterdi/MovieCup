@@ -10,7 +10,7 @@ namespace LayerGraphQL
 	{
 		public DisputaType()
 		{
-			Field(e => e.id);
+			Field(e => e.Id);
 			Field<ClassificacaoType>(nameof(Disputa.classificacao));
 			Field<FilmeType>(nameof(Disputa.desafiante));
 			Field<FilmeType>(nameof(Disputa.desafiado));

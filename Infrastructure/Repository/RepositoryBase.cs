@@ -133,14 +133,14 @@ namespace Infrastructure
 		{
 			foreach (var domain in domains)
 			{
-				this._domainEntitySet.Add(domain);
+				this._domainEntitySet.Add(domain).State = EntityState.Added;
 				yield return domain;
 			}
 		}
 
 		public virtual Task UpdateAsync(TDomain domain)
 		{
-			this._domainEntitySet.Update(domain);
+			this._domainEntitySet.Update(domain).State = EntityState.Modified;
 			return Task.CompletedTask;
 		}
 
@@ -154,7 +154,7 @@ namespace Infrastructure
 		{
 			foreach (var domain in domains)
 			{
-				this._domainEntitySet.Update(domain);
+				this._domainEntitySet.Update(domain).State = EntityState.Modified;
 				yield return domain;
 			}
 		}
@@ -167,7 +167,7 @@ namespace Infrastructure
 
 		public virtual Task RemoveAsync(TDomain domain)
 		{
-			this._domainEntitySet.Remove(domain);
+			this._domainEntitySet.Remove(domain).State = EntityState.Deleted;
 			return Task.CompletedTask;
 		}
 
@@ -177,7 +177,7 @@ namespace Infrastructure
 
 			if (finded != null)
 			{
-				this._domainEntitySet.Remove(finded);
+				this._domainEntitySet.Remove(finded).State = EntityState.Deleted;
 			}
 			return finded;
 		}

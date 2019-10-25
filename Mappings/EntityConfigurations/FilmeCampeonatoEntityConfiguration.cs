@@ -12,15 +12,15 @@ namespace Mappings
 	{
 		public void Configure(EntityTypeBuilder<FilmeCampeonato> builder)
 		{
-			builder.HasKey(e => e.id);
+			builder.HasKey(e => e.Id);
 
 			builder.HasOne(e => e.filme)
 				.WithMany(e => e.filmesCampeonato)
-				.HasForeignKey(e => e.id);
+				.HasForeignKey(e => e.Id);
 
 			builder.HasOne(e => e.campeonato)
 				.WithMany(e => e.campeonatoFilmes)
-				.HasForeignKey(e => e.id);
+				.HasForeignKey(e => e.Id);
 		}
 	}
 }

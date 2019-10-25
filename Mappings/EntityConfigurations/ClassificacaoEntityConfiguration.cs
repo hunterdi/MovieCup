@@ -12,13 +12,13 @@ namespace Mappings
 	{
 		public void Configure(EntityTypeBuilder<Classificacao> builder)
 		{
-			builder.HasKey(e => e.id);
+			builder.HasKey(e => e.Id);
 
 			builder.Property(e => e.campeonato).IsRequired();
 			
 			builder.HasMany(e => e.disputa)
 				.WithOne(e => e.classificacao)
-				.HasForeignKey(e => e.id);
+				.HasForeignKey(e => e.Id);
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace LayerGraphQL
 	{
 		public FilmeCampeonatoType()
 		{
-			Field(e => e.id);
+			Field(e => e.Id);
 			Field<FilmeType>(nameof(FilmeCampeonato.filme));
 			Field<CampeonatoType>(nameof(FilmeCampeonato.campeonato));
 		}

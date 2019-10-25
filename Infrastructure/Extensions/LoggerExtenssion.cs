@@ -9,7 +9,7 @@ namespace Infrastructure
 	{
 		public static ILoggerFactory AddContext(this ILoggerFactory factory, Func<string, LogLevel, bool> filter = null, string connectionString = null)
 		{
-			factory.AddProvider(new SystemLoggerProvider(filter, connectionString));
+			//factory.AddProvider(new SystemLoggerProvider(filter, connectionString));
 			return factory;
 		}
 

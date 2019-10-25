@@ -28,8 +28,8 @@ namespace Services
 
 		public override async Task CreateAsync(Campeonato campeonato)
 		{
-			var idsFilmes = campeonato.campeonatoFilmes.Select(e => e.filme.id).ToList();
-			var filmes = (await this.filmeService.GetAllByAsync((e => idsFilmes.Contains(e.id)), false)).ToList();
+			var idsFilmes = campeonato.campeonatoFilmes.Select(e => e.filme.Id).ToList();
+			var filmes = (await this.filmeService.GetAllByAsync((e => idsFilmes.Contains(e.Id)), false)).ToList();
 
 			campeonato.campeonatoFilmes = CreateFilmeCampeonatos(campeonato, filmes);
 			campeonato.classificacao = await this.classificacaoService.GerarClassificacoes(campeonato, filmes);
@@ -51,8 +51,8 @@ namespace Services
 
 		public async Task<Campeonato> GetFinalist(long id)
 		{
-			var response = (await this._repositoryBase.GetByIncludingAsync(e => e.id == id, false, e => e.campeonatoFilmes)).FirstOrDefault();
-			var classificacoes = (await this.classificacaoService.GetAllByAsync(e => e.campeonato.id == id, false)).ToList();
+			var response = (await this._repositoryBase.GetByIncludingAsync(e => e.Id == id, false, e => e.campeonatoFilmes)).FirstOrDefault();
+			var classificacoes = (await this.classificacaoService.GetAllByAsync(e => e.campeonato.Id == id, false)).ToList();
 
 			response.classificacao = classificacoes;
 
@@ -62,7 +62,7 @@ namespace Services
 				(e => e.filme)
 			};
 
-			var campeonatoFilmes = (await this.filmeCampeonatoService.GetByIncludingAsync(e => e.campeonato.id == id, false, expression.ToArray())).ToList();
+			var campeonatoFilmes = (await this.filmeCampeonatoService.GetByIncludingAsync(e => e.campeonato.Id == id, false, expression.ToArray())).ToList();
 			response.campeonatoFilmes = campeonatoFilmes;
 
 			return response;
