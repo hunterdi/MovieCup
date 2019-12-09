@@ -7,7 +7,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace MovieCup
+namespace Itau.Gateway
 {
 	public class CampeonatoController : ControllerApiBase<Campeonato, CampeonatoDto>
 	{

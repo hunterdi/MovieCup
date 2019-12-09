@@ -3,7 +3,6 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using GraphQL.Types;
 using Infrastructure;
-using LayerGraphQL;
 using Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +13,7 @@ using Repository;
 using Seed;
 using Services;
 
-namespace MovieCup
+namespace Itau.Gateway
 {
 	public class Startup
 	{
@@ -37,8 +36,7 @@ namespace MovieCup
 			services.AddTokenConfiguration(this._configuration);
 			services.AddMvcCoreConfiguration();
 			services.AddSwaggerConfiguration();
-			services.AddConfigurationGraphQL();
-
+			
 			var builder = new ContainerBuilder();
 			builder.RegisterModule<RepositoryModule>();
 			builder.RegisterModule<ServiceModule>();
@@ -69,8 +67,7 @@ namespace MovieCup
 			app.UseAuthentication();
 			app.UseCookiePolicy();
 			app.UseSwaggerConfiguration();
-			app.UseConfigurationGraphQL();
-
+			
 			SeedInitializer.Seed(app, _configuration);
 
 			app.UseMvcConfiguration();

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCup", "MovieCup\MovieCup.csproj", "{5C602977-C2F7-4D6D-9705-2F96AA891B9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itau.Gateway", "Itau.Gateway\Itau.Gateway.csproj", "{5C602977-C2F7-4D6D-9705-2F96AA891B9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{EE1BC200-C23A-4B86-A34D-4D9CA152A4F3}"
 EndProject
@@ -18,8 +18,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seed", "Seed\Seed.csproj", "{4E3A9CC0-CD66-481B-93A1-893832757EFC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{53DDAACC-061C-43FC-80F1-8A115F4715BB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayerGraphQL", "LayerGraphQL\LayerGraphQL.csproj", "{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +57,6 @@ Global
 		{53DDAACC-061C-43FC-80F1-8A115F4715BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53DDAACC-061C-43FC-80F1-8A115F4715BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53DDAACC-061C-43FC-80F1-8A115F4715BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FAE98D1-1515-4DC5-AA3C-8D4AB5418A49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

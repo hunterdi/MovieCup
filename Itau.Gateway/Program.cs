@@ -4,7 +4,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace MovieCup
+namespace Itau.Gateway
 {
 	public class Program
 	{

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace MovieCup
+namespace Itau.Gateway
 {
 	public class ClassificacaoController : ControllerApiBase<Classificacao, ClassificacaoDto>
 	{

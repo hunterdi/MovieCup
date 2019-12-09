@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-	"MovieCup": {
+	"Itau.Gateway": {
 		"commandName": "Project",
 		"launchBrowser": true,
 		"applicationUrl": "http://localhost:5000",

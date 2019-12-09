@@ -27,7 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Domains\Domains.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\LayerGraphQL\LayerGraphQL.csproj" />
     <ProjectReference Include="..\Mappings\Mappings.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Seed\Seed.csproj" />

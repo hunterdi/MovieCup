@@ -27,7 +27,7 @@
     <ProjectReference Include="..\Domains\Domains.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Mappings\Mappings.csproj" />
-    <ProjectReference Include="..\MovieCup\MovieCup.csproj" />
+    <ProjectReference Include="..\Itau.Gateway\Itau.Gateway.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Seed\Seed.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />

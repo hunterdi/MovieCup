@@ -8,7 +8,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace MovieCup
+namespace Itau.Gateway
 {
     public class DisputaController : ControllerApiBase<Disputa, DisputaDto>
 	{
