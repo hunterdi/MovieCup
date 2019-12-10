@@ -14,10 +14,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace Itau.Gateway
+namespace Santander.Api.Precla
 {
 	[AllowAnonymous]
-	[EnableCors("MovieCup")]
+	[EnableCors("Santander.Api.Precla")]
 	[Produces("application/json")]
 	[Route("api/[controller]")]
 	[ApiController]
@@ -80,7 +80,7 @@ namespace Itau.Gateway
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
-		[UserIdentityValidatorsMiddleware, Authorize("MovieCup"), ValidateAntiForgeryToken]
+		[UserIdentityValidatorsMiddleware, Authorize("Santander.Api.Precla"), ValidateAntiForgeryToken]
 		[HttpGet("me")]
 		public async Task<IActionResult> Me([FromQuery(Name = "email")] string email)
 		{
@@ -96,7 +96,7 @@ namespace Itau.Gateway
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
-		[UserIdentityValidatorsMiddleware, Authorize("MovieCup"), ValidateAntiForgeryToken]
+		[UserIdentityValidatorsMiddleware, Authorize("Santander.Api.Precla"), ValidateAntiForgeryToken]
 		[HttpPut("password")]
 		public async Task<IActionResult> ChangePassword([FromBody] ApplicationUserChangePasswordDto dto)
 		{
@@ -106,7 +106,7 @@ namespace Itau.Gateway
 		}
 
 		[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
-		[UserIdentityValidatorsMiddleware, Authorize("MovieCup"), ValidateAntiForgeryToken]
+		[UserIdentityValidatorsMiddleware, Authorize("Santander.Api.Precla"), ValidateAntiForgeryToken]
 		[HttpPut("email")]
 		public async Task<IActionResult> ChangeEmail([FromBody] ApplicationUserChangeEmailDto dto)
 		{

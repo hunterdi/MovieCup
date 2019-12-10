@@ -13,8 +13,10 @@ namespace Mappings
 		public void Configure(EntityTypeBuilder<Classificacao> builder)
 		{
 			builder.HasKey(e => e.Id);
+            builder.Property(e => e.Id)
+                .ValueGeneratedOnAdd();
 
-			builder.Property(e => e.campeonato).IsRequired();
+            builder.Property(e => e.campeonato).IsRequired();
 			
 			builder.HasMany(e => e.disputa)
 				.WithOne(e => e.classificacao)

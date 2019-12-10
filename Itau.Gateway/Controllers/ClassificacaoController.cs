@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace Itau.Gateway
+namespace Santander.Api.Precla
 {
 	public class ClassificacaoController : ControllerApiBase<Classificacao, ClassificacaoDto>
 	{

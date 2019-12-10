@@ -10,8 +10,10 @@ namespace Mappings
 		public void Configure(EntityTypeBuilder<Campeonato> builder)
 		{
 			builder.HasKey(e => e.Id);
+            builder.Property(e => e.Id)
+                .ValueGeneratedOnAdd();
 
-			builder.Property(e => e.classificacao).IsRequired();
+            builder.Property(e => e.classificacao).IsRequired();
 			builder.Property(e => e.campeonatoFilmes).IsRequired();
 			builder.Property(e => e.nome).IsRequired();
 

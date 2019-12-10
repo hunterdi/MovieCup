@@ -18,23 +18,24 @@ namespace Infrastructure
 				options.MaxModelValidationErrors = 10;
 				options.OutputFormatters.RemoveType<TextOutputFormatter>();
 				options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
-				options.OutputFormatters.RemoveType<JsonOutputFormatter>();
+				//options.OutputFormatters.RemoveType<JsonOutputFormatter>();
 				options.Filters.Add(typeof(ValidateModelStateFilter));
 			})
 			.AddApiExplorer()
-			.AddJsonFormatters()
+			//.AddJsonFormatters()
 			.AddJsonOptions(jo =>
 			{
-				jo.SerializerSettings.ContractResolver = new DefaultContractResolver()
-				{
-					NamingStrategy = new CamelCaseNamingStrategy()
-				};
-				jo.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-				jo.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                //jo.JsonSerializerOptions.ContractResolver = new DefaultContractResolver()
+                //{
+                //	NamingStrategy = new CamelCaseNamingStrategy()
+                //};
+                //jo.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                jo.JsonSerializerOptions.IgnoreNullValues = true;
+                jo.JsonSerializerOptions.WriteIndented = true;
 			})
 			.AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining<IValidatorBase>())
 			.AddControllersAsServices()
-			.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 			return services;
 		}
