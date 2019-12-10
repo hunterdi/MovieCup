@@ -8,7 +8,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace Itau.Gateway
+namespace Santander.Api.Precla
 {
     public class DisputaController : ControllerApiBase<Disputa, DisputaDto>
 	{

@@ -12,7 +12,7 @@ namespace Infrastructure
 		{
 			services.AddDbContextPool<ApplicationMemoryDbContext>(option =>
 			{
-				option.UseInMemoryDatabase(configuration.GetSection(SystemConstants.AppSettings.ConnectionString.ToDescription()).Value);
+				option.UseInMemoryDatabase(configuration.GetSection("ConnectionString").Value);
 			});
 			services.AddScoped<DbContext, ApplicationMemoryDbContext>();
 

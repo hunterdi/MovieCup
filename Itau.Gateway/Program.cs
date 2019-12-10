@@ -4,7 +4,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Itau.Gateway
+namespace Santander.Api.Precla
 {
 	public class Program
 	{

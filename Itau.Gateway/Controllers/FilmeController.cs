@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 using Services;
 
-namespace Itau.Gateway
+namespace Santander.Api.Precla
 {
 	public class FilmeController : ControllerApiBase<Filme, FilmeDto>
     {
