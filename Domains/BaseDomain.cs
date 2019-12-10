@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Domains
 {
-	public class BaseDomain: IBaseDomain<long>
-    {
+	public class BaseDomain
+	{
 		public long Id { get; set; }
 	}
 }

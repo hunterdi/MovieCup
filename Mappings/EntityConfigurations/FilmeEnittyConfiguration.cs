@@ -10,8 +10,6 @@ namespace Mappings
 		public void Configure(EntityTypeBuilder<Filme> builder)
 		{
 			builder.HasKey(e => e.Id);
-            builder.Property(e => e.Id)
-                .ValueGeneratedOnAdd();
 
 			builder.Property(e => e.ano).IsRequired();
 			builder.Property(e => e.nota).IsRequired();

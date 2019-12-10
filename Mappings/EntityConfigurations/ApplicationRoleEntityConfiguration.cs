@@ -12,11 +12,7 @@ namespace Mappings.EntityConfigurations
 	{
 		public void Configure(EntityTypeBuilder<ApplicationRole> builder)
 		{
-            builder.HasKey(e => e.Id);
-            builder.Property(e => e.Id)
-                .ValueGeneratedOnAdd();
-
-            builder.HasMany(e => e.UserRoles)
+			builder.HasMany(e => e.UserRoles)
 				.WithOne(e => e.Role)
 				.HasForeignKey(ur => ur.RoleId)
 				.IsRequired();

@@ -7,7 +7,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace Santander.Api.Precla
+namespace Itau.Gateway
 {
 	public class CampeonatoController : ControllerApiBase<Campeonato, CampeonatoDto>
 	{

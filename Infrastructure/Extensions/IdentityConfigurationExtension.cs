@@ -105,7 +105,7 @@ namespace Infrastructure
 			
 			services.AddAuthorization(auth =>
 			{
-				auth.AddPolicy("Santander.Api.Precla", policy =>
+				auth.AddPolicy("MovieCup", policy =>
 				{
 					policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
 					policy.RequireAuthenticatedUser();

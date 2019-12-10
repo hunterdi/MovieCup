@@ -13,7 +13,7 @@ using Repository;
 using Seed;
 using Services;
 
-namespace Santander.Api.Precla
+namespace Itau.Gateway
 {
 	public class Startup
 	{
@@ -45,24 +45,25 @@ namespace Santander.Api.Precla
 			return new AutofacServiceProvider(builder.Build());
 		}
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			var logger = loggerFactory.CreateLogger("Santander.Api.Precla");
+			var logger = loggerFactory.CreateLogger("MovieCup");
 			
 			app.UseStaticFiles();
 
-			//if (env.EnvironmentName)
-			//{
-			//	app.UseDeveloperExceptionPage();
-			//}
-			//else
-			//{
-			//	app.UseExceptionHandler("/Home/Error");
-			//	app.UseHsts();
-			//}
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+				app.UseDatabaseErrorPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Home/Error");
+				app.UseHsts();
+			}
 
 			app.UseErrorHandler();
-			app.UseCors("Itau.Gateway");
+			app.UseCors(SystemConstants.Cors.FrontMovieCup.ToDescription());
 			app.UseAuthentication();
 			app.UseCookiePolicy();
 			app.UseSwaggerConfiguration();

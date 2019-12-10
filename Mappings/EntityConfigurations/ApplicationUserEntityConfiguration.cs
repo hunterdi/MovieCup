@@ -12,11 +12,7 @@ namespace Mappings
 	{
 		public void Configure(EntityTypeBuilder<ApplicationUser> builder)
 		{
-            builder.HasKey(e => e.Id);
-            builder.Property(e => e.Id)
-                .ValueGeneratedOnAdd();
-
-            builder.Ignore(p => p.Password);
+			builder.Ignore(p => p.Password);
 			builder.Ignore(e => e.PhoneNumber);
 
 			builder.HasMany(e => e.Claims)

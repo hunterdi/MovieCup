@@ -13,10 +13,8 @@ namespace Mappings
 		public void Configure(EntityTypeBuilder<FilmeCampeonato> builder)
 		{
 			builder.HasKey(e => e.Id);
-            builder.Property(e => e.Id)
-                .ValueGeneratedOnAdd();
 
-            builder.HasOne(e => e.filme)
+			builder.HasOne(e => e.filme)
 				.WithMany(e => e.filmesCampeonato)
 				.HasForeignKey(e => e.Id);
 
