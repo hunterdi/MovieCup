@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure
 {
-	[Authorize("MovieCup")]
-	[EnableCors("MovieCup")]
+	[Authorize("Santander.Api.Precla")]
+	[EnableCors("Santander.Api.Precla")]
 	[Produces("application/json")]
 	[Route("api/[controller]")]
 	[ApiController]

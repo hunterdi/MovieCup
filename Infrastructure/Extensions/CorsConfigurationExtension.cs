@@ -9,9 +9,9 @@ namespace Infrastructure
 		{
 			services.AddCors(options =>
 			{
-				options.AddPolicy(SystemConstants.Cors.FrontMovieCup.ToDescription(), builderPolicy =>
+				options.AddPolicy("Itau.Gateway", builderPolicy =>
 				{
-					builderPolicy.WithOrigins(configuration.GetSection(SystemConstants.AppSettings.AllowedHosts.ToDescription()).Value)
+					builderPolicy.WithOrigins(configuration.GetSection("ConnectionString").Value)
 					.AllowAnyMethod()
 					.AllowAnyHeader()
 					.AllowCredentials();
