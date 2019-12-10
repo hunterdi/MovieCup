@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Domains
 {
-	public class BaseDto: IBaseDto<long>
+    public interface IBaseDomain<TKey>
     {
-		public long Id { get; set; }
-	}
+        TKey Id { get; set; }
+    }
 }
